@@ -17,6 +17,7 @@ pytest-cases = "^3.8.5"
 pytest-unordered = "^0.6.0"
 pytest-django = "^4.8.0"
 freezegun = "^1.5.1"
+pytest-coverage = "^0.0"
 
 
 [tool.poetry.group.linting.dependencies]
