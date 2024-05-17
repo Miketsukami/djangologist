@@ -42,7 +42,7 @@ jobs:
       with:
         auth: ${{ secrets.GIST_TOKEN }}
         gistID: 0a80cbf8588e10d9a6b67eeae7bbcbd2
-        filename: djangologist_python-${{ matrix.python-version }}.json
+        filename: djangology_python-${{ matrix.python-version }}.json
         label: Coverage
         message: ${{ env.total }}%
         minColorRange: 50

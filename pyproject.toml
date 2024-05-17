@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "djangologist"
+name = "djangology"
 version = "0.1.0"
 description = "Separate busines logic from infrastructure"
 authors = ["Artem Suhanov <miketsukami@outlook.com>"]

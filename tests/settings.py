@@ -1,4 +1,4 @@
-SECRET_KEY = 'djangologist'
+SECRET_KEY = 'djangology'
 
 DEBUG = True
 

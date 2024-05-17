@@ -1,6 +1,6 @@
-from djangologist.morphers import BaseModelMorpher
-from djangologist.selectors import BaseModelSelector
-from djangologist.services import BaseService
+from djangology.morphers import BaseModelMorpher
+from djangology.selectors import BaseModelSelector
+from djangology.services import BaseService
 
 from .models import Dummy
 
