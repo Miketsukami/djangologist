@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "djangologist"
+version = "0.1.0"
+description = "Separate busines logic from infrastructure"
+authors = ["Artem Suhanov <miketsukami@outlook.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10"
+Django = "^5.0.6"
+
+[tool.poetry.group.testing.dependencies]
+pytest = "^8.2.0"
+pytest-factoryboy = "^2.7.0"
+pytest-cases = "^3.8.5"
+pytest-unordered = "^0.6.0"
+pytest-django = "^4.8.0"
+freezegun = "^1.5.1"
+
+[tool.pytest.ini_options]
+django_find_project = false
+pythonpath = ["."]
+DJANGO_SETTINGS_MODULE = "tests.settings"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
