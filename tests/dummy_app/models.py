@@ -8,7 +8,7 @@ class Related(models.Model):
         verbose_name = 'Related'
         verbose_name_plural = 'Related'
 
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # pragma: nocover
         return self.pk
 
 
@@ -20,5 +20,5 @@ class Dummy(models.Model):
         verbose_name = 'Dummy'
         verbose_name_plural = 'Dummy'
 
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # pragma: nocover
         return self.pk

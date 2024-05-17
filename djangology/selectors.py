@@ -8,7 +8,7 @@ from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from .types import TModel
 
 
-if typing.TYPE_CHECKING:
+if typing.TYPE_CHECKING:  # pragma: nocover
     from django.db.models import QuerySet
 
 

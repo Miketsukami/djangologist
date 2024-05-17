@@ -6,7 +6,7 @@ import typing
 from django.utils import timezone
 
 
-if typing.TYPE_CHECKING:
+if typing.TYPE_CHECKING:  # pragma: nocover
     import datetime
 
 
