@@ -18,6 +18,10 @@ pytest-unordered = "^0.6.0"
 pytest-django = "^4.8.0"
 freezegun = "^1.5.1"
 
+
+[tool.poetry.group.linting.dependencies]
+ruff = "^0.4.4"
+
 [tool.pytest.ini_options]
 django_find_project = false
 pythonpath = ["."]
