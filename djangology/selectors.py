@@ -4,6 +4,7 @@ import abc
 import typing
 
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
+from django.db.models import Q
 
 from .exceptions import SelectorException
 from .types import TModel
@@ -22,6 +23,16 @@ class BaseModelSelector(typing.Generic[TModel], abc.ABC):
             queryset = self.model.objects.all()
 
         self.queryset = queryset
+
+    @typing.final
+    def _search(self, *, query: str, lookups: typing.Iterable[str], ordering: typing.Iterable[str]) -> typing.Self:
+        q = Q()
+        for lookup in lookups:
+            q |= Q(**{lookup: query})
+
+        self.queryset = self.queryset.filter(q).order_by(*ordering)
+
+        return self
 
     @typing.final
     def select_related(self, *lookups: str) -> typing.Self:
