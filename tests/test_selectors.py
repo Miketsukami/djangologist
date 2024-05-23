@@ -39,7 +39,7 @@ class TestBaseModelSelector:
 
     @pytest_cases.parametrize_with_cases(('pk', 'expected'), cases=CasesGetObject)
     def test_get_object(self, dummies, pk, expected):
-        instance = DummySelector().get_object(pk=pk)
+        instance = DummySelector().get_object(pk=pk, raise_exception=False)
 
         assert instance == expected
 
