@@ -33,11 +33,12 @@ class BaseModelSelector(typing.Generic[TModel], abc.ABC):
         return self.queryset
 
     @typing.final
-    def get_object(self, **params: typing.Any) -> TModel:
+    def get_object(self, *, raise_exception: bool = True, **params: typing.Any) -> TModel | None:
         try:
             return self.queryset.get(**params)
         except (ObjectDoesNotExist, MultipleObjectsReturned) as e:
-            raise SelectorException(e) from e
+            if raise_exception:
+                raise SelectorException(e) from e
 
     @typing.final
     @property
