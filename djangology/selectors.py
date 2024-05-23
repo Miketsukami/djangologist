@@ -25,12 +25,19 @@ class BaseModelSelector(typing.Generic[TModel], abc.ABC):
         self.queryset = queryset
 
     @typing.final
-    def _search(self, *, query: str, lookups: typing.Iterable[str], ordering: typing.Iterable[str]) -> typing.Self:
+    def _search(
+        self, *, query: str | None, lookups: typing.Iterable[str], ordering: typing.Iterable[str]
+    ) -> typing.Self:
+        self.queryset = self.queryset.order_by(*ordering)
+
+        if query is None:
+            return self
+
         q = Q()
         for lookup in lookups:
             q |= Q(**{lookup: query})
 
-        self.queryset = self.queryset.filter(q).order_by(*ordering)
+        self.queryset = self.queryset.filter(q)
 
         return self
 
