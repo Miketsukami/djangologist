@@ -5,6 +5,7 @@ import typing
 
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 
+from .exceptions import SelectorException
 from .types import TModel
 
 
@@ -32,11 +33,11 @@ class BaseModelSelector(typing.Generic[TModel], abc.ABC):
         return self.queryset
 
     @typing.final
-    def get_object(self, **params: typing.Any) -> TModel | None:
+    def get_object(self, **params: typing.Any) -> TModel:
         try:
             return self.queryset.get(**params)
-        except (ObjectDoesNotExist, MultipleObjectsReturned):
-            pass
+        except (ObjectDoesNotExist, MultipleObjectsReturned) as e:
+            raise SelectorException(e) from e
 
     @typing.final
     @property
