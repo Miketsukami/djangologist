@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import abc
 import typing
+import warnings
 
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from django.db.models import Q
@@ -25,7 +26,15 @@ class BaseModelSelector(typing.Generic[TModel], abc.ABC):
         self.queryset = queryset
 
     @typing.final
-    def _search(
+    def __enter__(self) -> typing.Self:
+        return self
+
+    @typing.final
+    def __exit__(self, exc_type: typing.Any, exc_val: typing.Any, exc_tb: typing.Any) -> None:
+        pass
+
+    @typing.final
+    def generic_search(
         self, *, query: str | None, lookups: typing.Iterable[str], ordering: typing.Iterable[str]
     ) -> typing.Self:
         self.queryset = self.queryset.order_by(*ordering)
@@ -42,8 +51,20 @@ class BaseModelSelector(typing.Generic[TModel], abc.ABC):
         return self
 
     @typing.final
+    def _search(
+        self, *, query: str | None, lookups: typing.Iterable[str], ordering: typing.Iterable[str]
+    ) -> typing.Self:
+        warnings.warn('Please use `generic_search` instead of `_search`', DeprecationWarning, stacklevel=2)
+        return self.generic_search(query=query, lookups=lookups, ordering=ordering)
+
+    @typing.final
     def select_related(self, *lookups: str) -> typing.Self:
         self.queryset = self.queryset.select_related(*lookups)
+        return self
+
+    @typing.final
+    def select_by_pks(self, *, pks: typing.Iterable[typing.Any]) -> typing.Self:
+        self.queryset = self.queryset.filter(pk__in=pks)
         return self
 
     @typing.final
